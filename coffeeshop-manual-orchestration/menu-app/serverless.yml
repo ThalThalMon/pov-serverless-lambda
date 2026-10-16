@@ -1,0 +1,18 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: ttmonaws
+app: coffeeshop
+service: menu-app
+frameworkVersion: "4"
+
+provider:
+  name: aws
+  runtime: nodejs24.x
+  architecture: arm64
+
+functions:
+  getMenu:
+    handler: handler.getMenu
+    events:
+      - httpApi:
+          path: /menu
+          method: get

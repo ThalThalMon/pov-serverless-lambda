@@ -1,0 +1,33 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: ttmonaws
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: coffeeshop
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: review-app
+
+provider:
+  name: aws
+  runtime: nodejs24.x
+  architecture: arm64
+  environment:
+    RATINGS_URL: https://7a06971f9f.execute-api.us-east-1.amazonaws.com/rating
+
+functions:
+  reviewV1:
+    handler: handler.reviewV1
+    events:
+      - httpApi:
+          path: /review-v1
+          method: get
+  reviewV2:
+    handler: handler.reviewV2
+    events:
+      - httpApi:
+          path: /review-v2
+          method: get
+  reviewV3:
+    handler: handler.reviewV3
+    events:
+      - httpApi:
+          path: /review-v3
+          method: get
